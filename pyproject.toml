@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "matten"
+version = "0.0.1"
+readme = "README.md"
+requires-python = ">=3.8, <3.11"
+dependencies = [
+#    "pytorch-lightning>1.7.0, <1.9.0",
+#    "lightning-bolts>=0.6.0",
+#    "torchmetrics>=0.10.0",
+#    "torch_geometric",
+    "e3nn",
+    "ase",
+    "pymatgen",
+    "loguru",
+    "torchtyping",
+]
+
+[tool.black]
+line-length = 88
+
+# Explicitly add src_paths so that import of current package will be placed at the bottom.
+[tool.isort]
+src_paths = ["src", "tests"]

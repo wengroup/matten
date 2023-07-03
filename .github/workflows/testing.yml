@@ -1,0 +1,65 @@
+name: Testing
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pre-commit
+      - name: Lint
+        run: pre-commit run --show-diff-on-failure
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 3
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: ${{ matrix.python-version }}
+          # activate-environment should be the same name as in environment.yml
+          activate-environment: matten
+          environment-file: environment.yml
+
+      - name: Install package
+        shell: bash -l {0}
+        run: |
+          # Multiple channels having pytorch. Specifying it in environment.yml is messy
+          mamba install pytorch==1.9.0 -c pytorch
+          mamba install pyg==2.0.1 -c pyg -c conda-forge
+          pip install -e .
+
+      # - name: Lint with flake8
+      #   shell: bash -l {0}
+      #   run: |
+      #     # stop the build if there are Python syntax errors or undefined names
+      #     flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+      #     # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+      #     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: Check with black
+        uses: psf/black@stable
+
+      - name: Test with pytest
+        shell: bash -l {0}
+        run: |
+          cd tests
+          pytest
