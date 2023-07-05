@@ -180,7 +180,7 @@ def get_wandb_checkpoint_and_identifier_latest(
     save_dir: Union[str, Path], run_directory: str = "latest-run"
 ) -> Tuple[Union[str, None], Union[str, None]]:
     """
-    Get the latest checkpoint path and the identifier of the wandb logger from wandb logs.
+    Get latest checkpoint path and the identifier of the wandb logger from wandb logs.
 
     Args:
         save_dir: name of the directory to save wandb log, e.g. /path/to/wandb_log/

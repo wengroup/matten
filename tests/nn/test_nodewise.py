@@ -5,7 +5,6 @@ from matten.nn.nodewise import NodewiseSelect
 
 
 def test_atomwise_select():
-
     node_feats = DataKey.NODE_FEATURES
     mask_field = "node_masks"
     out_field = "selected_node_features"

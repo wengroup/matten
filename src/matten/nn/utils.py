@@ -140,7 +140,6 @@ class ActivationLayer(torch.nn.Module):
             )
 
         elif activation_type == "norm":
-
             self.activation = NormActivation(
                 irreps_in=(irreps_scalars + irreps_gated).simplify(),
                 # norm is an even scalar, so activation_scalars[1]
@@ -256,7 +255,6 @@ class UVUTensorProduct(torch.nn.Module):
     def forward(
         self, data1: Tensor, data2: Tensor, data_weight: Optional[Tensor] = None
     ) -> Tensor:
-
         if self.weight_nn is not None:
             assert data_weight is not None, "data for weight not provided"
             weight = self.weight_nn(data_weight)
@@ -524,7 +522,7 @@ class InstanceNorm(torch.nn.Module):
         iw = 0
         ib = 0
 
-        for (mul, ir) in self.irreps:
+        for mul, ir in self.irreps:
             # mul is the multiplicity (number of copies) of some irrep type (ir)
             d = ir.dim
             field = input[:, ix : ix + mul * d]  # [batch * sample, mul * repr]
@@ -560,7 +558,8 @@ class InstanceNorm(torch.nn.Module):
             else:
                 raise ValueError("Invalid reduce option {}".format(self.reduce))
 
-            # Then apply the rescaling (divide by the sqrt of the squared_norm, i.e., divide by the norm
+            # Then apply the rescaling (divide by the sqrt of the squared_norm,
+            # i.e., divide by the norm
             field_norm = (field_norm + self.eps).pow(-0.5)  # [batch, mul]
 
             if self.affine:

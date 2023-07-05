@@ -25,10 +25,10 @@ class TimeMeter:
         self.t = t
 
         if counter % self.frequency == 0:
-            message = "\t\t" if message is None else f"\t\t{message} "
-            message = message + " " * (45 - len(message))
+            msg = "\t\t" if message is None else f"\t\t{message} "
+            msg = msg + " " * (45 - len(msg))
             print(
-                f"{message}delta time: {delta_t:.2f} cumulative time: {cumulative_t:.2f}",
+                f"{msg}delta time: {delta_t:.2f} cumulative time: {cumulative_t:.2f}",
                 flush=flush,
             )
 

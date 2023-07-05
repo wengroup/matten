@@ -31,7 +31,7 @@ def get_model(output_format="cartesian", output_formula="ijkl=jikl=klij"):
         "invariant_layers": 2,
         "invariant_neurons": 32,
         "average_num_neighbors": None,
-        "conv_layer_irreps": "32x0o+32x0e + 16x1o+16x1e + 8x2o+8x2e + 4x3o+4x3e + 4x4o+4x4e",
+        "conv_layer_irreps": "32x0o+32x0e+16x1o+16x1e+8x2o+8x2e+4x3o+4x3e+4x4o+4x4e",
         "nonlinearity_type": "gate",
         "normalization": None,
         "resnet": True,

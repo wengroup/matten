@@ -481,7 +481,7 @@ class ModelForPyGData(BaseModel):
 
     Subclass must implement:
         - init_backbone(): create the underlying torch model
-        - init_tasks(): create tasks that defines initialize the loss function and metrics
+        - init_tasks(): create tasks that initialize the loss function and metrics
 
     """
 

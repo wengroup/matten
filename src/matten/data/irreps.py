@@ -113,9 +113,9 @@ class ModuleIrreps:
             ok = _check_irreps_type(irreps_in[k], v)
             if not ok:
                 raise ValueError(
-                    f"This module {type(self)} expects irreps_in['{k}'] be of type {v}, "
-                    f"instead got {irreps_in[k]}. Note, type means degree and parity, "
-                    f"not multiplicity."
+                    f"This module {type(self)} expects irreps_in['{k}'] be of type "
+                    f"{v}, instead got {irreps_in[k]}. Note, type means degree and "
+                    "parity, not multiplicity."
                 )
 
         # check optional exact

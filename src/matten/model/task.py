@@ -141,8 +141,8 @@ class Task:
         Note:
             Sometimes you may want to use negative weight, depending on the ``mode`` of
             early stopping and mode checkpoing functionality. For example, if we set
-            ``mode="min"`` for early stopping and use torchmetric.Accuracy as the metric,
-            we need to use a score weight (e.g. -1) to make sure better models
+            ``mode="min"`` for early stopping and use torchmetric.Accuracy as the
+            metric, we need to use a score weight (e.g. -1) to make sure better models
             (higher accuracy) leads to lower score, which is expected by mode="min"
             of the early stopping.
 

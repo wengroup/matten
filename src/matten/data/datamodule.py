@@ -99,7 +99,7 @@ class BaseDataModule(LightningDataModule):
         Pack dataset info need by a model.
 
         This may include info for initialization of the model (e.g. number of classes),
-        and info needed by label postprocessing (e.g. label mean and standard deviation).
+        and info needed by label postprocessing (e.g. label mean and stdev).
 
         Such info will be pass as arguments to the model.
         """
@@ -108,7 +108,7 @@ class BaseDataModule(LightningDataModule):
     def get_init_state_dict(self):
         """
         Determine the value of dataset state dict based on:
-        - whether this is in finetune model based on pretrained_model_state_dict_filename
+        - whether this in finetune model based on pretrained_model_state_dict_filename
         - restore_state_dict_filename
         """
 

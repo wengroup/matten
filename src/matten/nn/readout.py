@@ -54,6 +54,6 @@ class IrrepsToCartesianTensor(ModuleIrreps, torch.nn.Module):
     def __repr__(self):
         return (
             f"{self.__class__.__name__}(\n"
-            f"  field: {self.field}, out_field: {self.out_field}, formula: {self.formula}\n"
-            ")"
+            f"  field: {self.field}, out_field: {self.out_field}, formula: "
+            f"{self.formula}\n)"
         )

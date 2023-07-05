@@ -23,7 +23,6 @@ class NodewiseSelect(ModuleIrreps, torch.nn.Module):
         out_field: Optional[str] = None,
         mask_field: Optional[str] = None,
     ):
-
         """
         Select the atom features (attrs) in a structure by boolean masks.
 

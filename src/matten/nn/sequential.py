@@ -21,7 +21,6 @@ class Sequential(torch.nn.Sequential, ModuleIrreps):
         ...
 
     def __init__(self, *args):
-
         # dict input
         if len(args) == 1 and isinstance(args[0], OrderedDict):
             module_dict = args[0]
@@ -38,8 +37,8 @@ class Sequential(torch.nn.Sequential, ModuleIrreps):
             if not _check_irreps_compatible(m1.irreps_out, m2.irreps_in):
                 raise ValueError(
                     f"Output irreps of module {i} `{m1.__class__.__name__}`: "
-                    f"{m1.irreps_out}` is incompatible with input irreps of module {i+1} "
-                    f"`{m2.__class__.__name__}`: {m2.irreps_in}."
+                    f"{m1.irreps_out}` is incompatible with input irreps of "
+                    f"module {i+1} `{m2.__class__.__name__}`: {m2.irreps_in}."
                 )
 
         self.init_irreps(

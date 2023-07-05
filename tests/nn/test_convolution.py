@@ -5,8 +5,7 @@ from matten.nn.transformer_conv import TransformerConv
 
 
 def test_Transformer():
-
-    conv = TransformerConv(
+    TransformerConv(
         irreps_in={
             DataKey.NODE_FEATURES: Irreps("4x1e+2x0e"),
             DataKey.NODE_ATTRS: Irreps("4x1e+2x0e"),

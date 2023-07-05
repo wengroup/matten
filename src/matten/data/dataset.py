@@ -115,7 +115,7 @@ class InMemoryDataset(PyGInMemoryDataset):
         """
         Process the (downloaded) files to get a list of data points.
 
-        In this function, the files in ``self.raw_file_names`` (i.e. `<root>/<filenames>`
+        In this function, the files ``self.raw_file_names`` (i.e. `<root>/<filenames>`
         should be processed to generate a list of ``DataPoint`` object.
         """
         raise NotImplementedError

@@ -50,7 +50,6 @@ def train_val_test_split_dataframe(
     stratify: Optional[str] = None,
     random_state: int = 35,
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-
     """
     Split a pandas dataframe into a train dataframe and a test dataframe.
 

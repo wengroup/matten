@@ -7,6 +7,8 @@ from typing import Union
 import torch
 from e3nn import o3
 from e3nn.util.jit import compile_mode
+from torch import nn
+
 
 from matten.data.irreps import DataKey, ModuleIrreps
 
@@ -35,10 +37,6 @@ class ShiftedSoftPlus(torch.nn.Module):
         :return: torch.Tensor, ssp(x)
         """
         return self.softplus(x) - self._log2
-
-
-import torch
-from torch import nn
 
 
 # source nequip.nn.cutoffs
@@ -136,10 +134,12 @@ class SphericalHarmonicEdgeAttrs(ModuleIrreps, torch.nn.Module):
     Parameters follow ``e3nn.o3.spherical_harmonics``.
 
     Args:
-        irreps_edge_sh (int, str, or o3.Irreps): if int, will be treated as lmax for o3.Irreps.spherical_harmonics(lmax)
+        irreps_edge_sh (int, str, or o3.Irreps): if int, will be treated as lmax for
+            o3.Irreps.spherical_harmonics(lmax)
         edge_sh_normalization (str): the normalization scheme to use
-        edge_sh_normalize (bool, default: True): whether to normalize the spherical harmonics
-        out_field (str, default: AtomicDataDict.EDGE_ATTRS_KEY: data/irreps field
+        edge_sh_normalize (bool, default: True): whether to normalize the spherical
+        harmonics out_field (str, default: AtomicDataDict.EDGE_ATTRS_KEY: data/irreps
+            field.
     """
 
     out_field: str
@@ -237,7 +237,9 @@ def with_edge_vectors(data: DataKey.Type, with_lengths: bool = True) -> DataKey.
         edge_index = data[DataKey.EDGE_INDEX]
         edge_vec = pos[edge_index[1]] - pos[edge_index[0]]
         if DataKey.CELL in data:
-            # ^ note that to save time we don't check that the edge_cell_shifts are trivial if no cell is provided; we just assume they are either not present or all zero.
+            # ^ note that to save time we don't check that the edge_cell_shifts are
+            # trivial if no cell is provided; we just assume they are either not
+            # present or all zero.
             # -1 gives a batch dim no matter what
             cell = data[DataKey.CELL].view(-1, 3, 3)
             edge_cell_shift = data[DataKey.EDGE_CELL_SHIFT]

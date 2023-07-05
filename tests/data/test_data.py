@@ -1,6 +1,5 @@
 from pathlib import Path
 
-import ase.io
 import numpy as np
 from torch_geometric.data import Batch
 

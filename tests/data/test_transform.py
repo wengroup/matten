@@ -45,7 +45,6 @@ def test_mean_norm_normalize():
 
 
 def test_scalar_normalize():
-
     N = 3
     dim = 4
     data = torch.arange(N * dim).reshape(N, dim).to(torch.float)

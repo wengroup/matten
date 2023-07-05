@@ -4,7 +4,6 @@ from matten.data.split import train_test_split_dataframe
 
 
 def create_df():
-
     df = pd.DataFrame(
         {
             "x": list(range(5)),
