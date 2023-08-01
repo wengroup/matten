@@ -49,3 +49,13 @@ crystals, pass a list of structures to `predict`.
 - The full dataset is available at: [TODO]
 
 ## Reference
+
+```
+@article{matten,
+  title = {A universal equivariant graph neural network for the elasticity tensors of any crystal system},
+  author = {Wen, Mingjian and Horton, Matthew K. and Munro, Jason M. and Huck, Patrick and Persson, Kristin A.},
+  doi = {10.48550/ARXIV.2307.15242},
+  publisher = {arXiv},
+  year = {2023},
+}
+```
