@@ -1,6 +1,7 @@
 import tempfile
 import warnings
 from pathlib import Path
+from typing import List, Union
 
 import numpy as np
 import torch
@@ -47,7 +48,7 @@ def get_pretrained_config(identifier: str, config_filename: str = "config_final.
 
 
 def get_data_loader(
-    structures: list[Structure], identifier: str, batch_size: int = 200
+    structures: List[Structure], identifier: str, batch_size: int = 200
 ) -> DataLoader:
     # config contains info for dataset and data loader, we only use the dataset part,
     # and adjust some parameters
@@ -85,7 +86,7 @@ def get_data_loader(
     return DataLoader(dataset=dataset, shuffle=False, batch_size=batch_size)
 
 
-def check_species(model, structures: list[Structure]):
+def check_species(model, structures: List[Structure]):
     """
     Check if the species in the structures are support by the model.
     """
@@ -110,7 +111,7 @@ def evaluate(
     model,
     loader,
     target_name: str = "elastic_tensor_full",
-) -> list[torch.Tensor]:
+) -> List[torch.Tensor]:
     """
     Evaluate the model to generate predictions.
 
@@ -139,11 +140,11 @@ def evaluate(
 
 
 def predict(
-    structure: Structure | list[Structure],
+    structure: Union[Structure, List[Structure]],
     model_identifier="20230627",
     batch_size: int = 200,
     logger_level: str = "ERROR",
-) -> ElasticTensor | list[ElasticTensor]:
+) -> Union[ElasticTensor, List[ElasticTensor]]:
     f"""
     Predict the property of a structure or a list of structures.
 

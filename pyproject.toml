@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "matten"
 version = "0.0.1"
 readme = "README.md"
-requires-python = ">=3.10, <3.11"
+requires-python = ">=3.8, <3.11"
 dependencies = [
     "pytorch-lightning>1.7.0, <1.9.0",
     "lightning-bolts>=0.6.0",

@@ -379,7 +379,7 @@ class TensorDatasetPrediction(TensorDataset):
         self,
         filename: str,  # this can be None
         r_cut: float,
-        structures: list[Structure],
+        structures: List[Structure],
         **kwargs,
     ):
         self.structures = structures
@@ -414,9 +414,9 @@ class TensorDataModule(BaseDataModule):
         scalar_target_names: List[str] = None,
         log_scalar_targets: List[bool] = None,
         normalize_scalar_targets: List[bool] = None,
-        global_featurizer: Union[str, list[str]] = None,
+        global_featurizer: Union[str, List[str]] = None,
         normalize_global_features: bool = False,
-        atom_featurizer: Union[str, list[str]] = None,
+        atom_featurizer: Union[str, List[str]] = None,
         normalize_atom_features: bool = False,
         root: Union[str, Path] = ".",
         reuse: bool = True,

@@ -1,6 +1,7 @@
 """Script to train the materials tensor model."""
 
 from pathlib import Path
+from typing import Dict, List, Union
 
 import yaml
 from loguru import logger
@@ -13,7 +14,7 @@ from matten.model_factory.task import TensorRegressionTask
 from matten.model_factory.tfn_scalar_tensor import ScalarTensorModel
 
 
-def instantiate_class(d: dict | list):
+def instantiate_class(d: Union[Dict, List]):
     args = tuple()  # no positional args
     if isinstance(d, dict):
         return lit_instantiate_class(args, d)
@@ -30,7 +31,7 @@ def get_args(path: Path):
     return config
 
 
-def main(config: dict):
+def main(config: Dict):
     dm = TensorDataModule(**config["data"])
     dm.prepare_data()
     dm.setup()
