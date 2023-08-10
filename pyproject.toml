@@ -8,10 +8,9 @@ version = "0.0.1"
 readme = "README.md"
 requires-python = ">=3.8, <3.11"
 dependencies = [
-    "pytorch-lightning>1.7.0, <1.9.0",
-    "lightning-bolts>=0.6.0",
-    "torchmetrics>=0.10.0,<1.0.0",
-    "torch_geometric",
+    "pytorch-lightning>=2.0.0",
+    "torchmetrics>=0.10.0, <1.0.0",
+    "torch_geometric>=2.3.0",
     "torch_scatter",
     "e3nn",
     "ase",
