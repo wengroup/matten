@@ -17,7 +17,7 @@ from matten.utils import CartesianTensorWrapper
 
 def get_data():
     filename = (
-        Path(__file__).parent.parent
+        Path(__file__).resolve().parent.parent
         / "datasets"
         / "example_crystal_elasticity_tensor_n100.json"
     )

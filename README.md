@@ -7,14 +7,12 @@ MatTen is an equivariant graph neural network built using [e3nn](https://github.
 
 ## Install
 
-Follow the official documentation to install the dependencies: [pytorch>=2.0.0](https://pytorch.org/get-started/locally/),
-[pyg>=2.3.0](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html),
-and [pytorch-lightning>=2.0.0](https://lightning.ai/docs/pytorch/latest/).
+Follow the official documentation to install [pytorch>=2.0.0](https://pytorch.org/get-started/locally/).
 Then
 
 ```
 git clone https://github.com/wengroup/matten.git
-pip install -e matten
+pip install -e ./matten
 ```
 
 ## Use the pretrained model
