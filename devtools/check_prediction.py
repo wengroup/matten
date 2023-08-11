@@ -5,6 +5,7 @@ Using the same dataset as in fitting, we check the prediction script recovers
 the MAE.
 """
 from pathlib import Path
+from typing import List
 
 import pandas as pd
 import torch
@@ -16,7 +17,7 @@ from matten.utils import CartesianTensorWrapper
 
 def get_data():
     filename = (
-        Path(__file__).parent.parent
+        Path(__file__).resolve().parent.parent
         / "datasets"
         / "example_crystal_elasticity_tensor_n100.json"
     )
@@ -30,7 +31,7 @@ def get_data():
     return structures, targets
 
 
-def get_spherical_tensor(t: list[torch.Tensor]):
+def get_spherical_tensor(t: List[torch.Tensor]):
     """Convert a Cartesian tensor to a spherical tensor."""
     t = torch.stack(t)
     converter = CartesianTensorWrapper("ijkl=jikl=klij")

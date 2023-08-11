@@ -11,7 +11,7 @@ Note, this only works for a single target.
 """
 
 from collections import OrderedDict
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Tuple
 
 import torch
 from e3nn.io import CartesianTensor
@@ -34,7 +34,7 @@ class ScalarTensorModel(ModelForPyGData):
         self,
         backbone_hparams: Dict[str, Any],
         dataset_hparams: Optional[Dict[str, Any]] = None,
-    ) -> tuple[torch.nn.Module, dict]:
+    ) -> Tuple[torch.nn.Module, Dict]:
         backbone = create_model(backbone_hparams, dataset_hparams)
 
         formula = (backbone_hparams["output_formula"]).lower()
