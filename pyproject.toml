@@ -19,9 +19,12 @@ dependencies = [
     "torchtyping",
 ]
 
+[project.optional-dependencies]
+test = ["pytest"]
+
 [tool.black]
 line-length = 88
 
-# Explicitly add src_paths so that import of current package will be placed at the bottom.
+# Add src_paths so that import of current package will be placed at the bottom.
 [tool.isort]
 src_paths = ["src", "tests"]
