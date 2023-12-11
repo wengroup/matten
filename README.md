@@ -44,7 +44,7 @@ crystals, pass a list of structures to `predict`.
 ## Data
 
 - An example of 100 crystals is available in the [datasets](./datasets) directory.
-- The full dataset is available at: [TODO]
+- The full dataset is available at: https://doi.org/10.5281/zenodo.8190849
 
 ## Reference
 
