@@ -48,7 +48,6 @@ jobs:
       - name: Install package
         run: |
           python -m pip install --upgrade pip
-          pip install torch
           pip install -e .[strict,test]
 
       - name: Test
