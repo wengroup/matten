@@ -142,6 +142,7 @@ def evaluate(
 def predict(
     structure: Union[Structure, List[Structure]],
     model_identifier="20230627",
+    checkpoint: str = "model_final.ckpt",
     batch_size: int = 200,
     logger_level: str = "ERROR",
 ) -> Union[ElasticTensor, List[ElasticTensor]]:
@@ -152,6 +153,7 @@ def predict(
         structure: a structure or a list of structures to predict.
         model_identifier: the identifier of the model to use. All models are placed in
             `matten/pretrained/{model_identifier}`.
+        checkpoint: the checkpoint file to use. The default is `model_final.ckpt`.
         batch_size: the batch size for prediction. In general, the larger the faster,
             but it may be limited by the CPU memory.
         logger_level: the level of the logger. Pptions are `DEBUG`, `INFO`, `WARNING`,
@@ -170,7 +172,7 @@ def predict(
     else:
         single_struct = False
 
-    model = get_pretrained_model(identifier=model_identifier)
+    model = get_pretrained_model(identifier=model_identifier, checkpoint=checkpoint)
     check_species(model, structure)
     loader = get_data_loader(structure, model_identifier, batch_size=batch_size)
 
