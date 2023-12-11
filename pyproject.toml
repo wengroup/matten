@@ -8,6 +8,7 @@ version = "0.0.1"
 readme = "README.md"
 requires-python = ">=3.8, <3.11"
 dependencies = [
+    "torch>=2.0.0",
     "pytorch-lightning>=2.0.0",
     "torchmetrics>=0.10.0, <1.0.0",
     "torch_geometric>=2.3.0",
@@ -22,7 +23,7 @@ dependencies = [
 [project.optional-dependencies]
 test = ["pytest"]
 strict = [
-    "torch==2.1.1",
+    "torch==2.0.0",
     "pytorch-lightning==2.0.0",
     "torchmetrics==0.10.0",
     "torch_geometric==2.3.0",
