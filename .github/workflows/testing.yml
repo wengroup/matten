@@ -49,6 +49,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install torch
+          pip install torch_scatter
           pip install -e .[strict,test]
 
       - name: Test
