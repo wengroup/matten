@@ -12,7 +12,7 @@ dependencies = [
     "pytorch-lightning>=2.0.0",
     "torchmetrics>=0.10.0, <1.0.0",
     "torch_geometric>=2.3.0",
-    "torch_scatter",
+    "torch_scatter==2.1.1",
     "e3nn",
     "ase",
     "pymatgen",
