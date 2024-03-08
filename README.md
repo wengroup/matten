@@ -54,10 +54,10 @@ See instructions [here](./scripts/README.md).
 
 ```
 @article{matten,
-  title = {A universal equivariant graph neural network for the elasticity tensors of any crystal system},
+  title = {An equivariant graph neural network for the elasticity tensors of all seven crystal systems},
   author = {Wen, Mingjian and Horton, Matthew K. and Munro, Jason M. and Huck, Patrick and Persson, Kristin A.},
-  doi = {10.48550/ARXIV.2307.15242},
-  publisher = {arXiv},
-  year = {2023},
+  doi = {10.1039/D3DD00233K},
+  publisher = {Digital Discovery},
+  year = {2024},
 }
 ```
