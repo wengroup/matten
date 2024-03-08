@@ -3,10 +3,10 @@ log_level: info
 
 data:
   root: ../datasets/
-  r_cut: 5.0
   trainset_filename: example_crystal_elasticity_tensor_n100.json
   valset_filename: example_crystal_elasticity_tensor_n100.json
   testset_filename: example_crystal_elasticity_tensor_n100.json
+  r_cut: 5.0
   reuse: false
   loader_kwargs:
     batch_size: 32
