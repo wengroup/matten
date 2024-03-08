@@ -13,7 +13,7 @@ from matten.utils import to_path, yaml_dump
 
 def get_git_repo_commit(repo_path: Path) -> str:
     """
-    Get the latest git commit info of a github repository.
+    Get the latest git commit info of a git repository.
 
     Args:
         repo_path: path to the repo
