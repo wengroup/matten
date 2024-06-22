@@ -52,12 +52,18 @@ See instructions [here](./scripts/README.md).
 
 ## Reference
 
+> Wen, M., Horton, M. K., Munro, J. M., Huck, P., & Persson, K. A. (2024). An equivariant graph neural network for the elasticity tensors of all seven crystal systems. Digital Discovery, 3(5), 869–882. doi: 10.1039/D3DD00233K
+
 ```
 @article{matten,
-  title = {An equivariant graph neural network for the elasticity tensors of all seven crystal systems},
   author = {Wen, Mingjian and Horton, Matthew K. and Munro, Jason M. and Huck, Patrick and Persson, Kristin A.},
-  doi = {10.1039/D3DD00233K},
-  publisher = {Digital Discovery},
+  title = {An equivariant graph neural network for the elasticity tensors of all seven crystal systems},
+  journal = {Digital Discovery},
+  volume = {3},
+  number = {5},
+  pages = {869--882},
   year = {2024},
+  publisher = {RSC},
+  doi = {10.1039/D3DD00233K}
 }
 ```
