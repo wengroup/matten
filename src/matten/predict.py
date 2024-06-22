@@ -151,18 +151,21 @@ def predict(
 
     Args:
         structure: a structure or a list of structures to predict.
-        model_identifier: the identifier of the model to use. All models are placed in
-            `matten/pretrained/{model_identifier}`.
+        model_identifier: the identifier of the model to use. All pretrained models are
+            placed in `matten/pretrained/{model_identifier}`.
+            If you want to use your own model, you can provide the path to a directory,
+            and the directory should contain two files:
+                - `model_final.ckpt`: your trained model, which can be found in the
+                   job directory after training.
+                - `config_final.yaml`: the configuration file used to train the model.
         checkpoint: the checkpoint file to use. The default is `model_final.ckpt`.
         batch_size: the batch size for prediction. In general, the larger the faster,
             but it may be limited by the CPU memory.
-        logger_level: the level of the logger. Pptions are `DEBUG`, `INFO`, `WARNING`,
+        logger_level: the level of the logger. Options are `DEBUG`, `INFO`, `WARNING`,
             `ERROR`, and `CRITICAL`.
 
-
     Returns:
-        Predicted elastic tensor(s). `None` if the model cannot make prediction for a
-            structure.
+        Predicted tensor(s). `None` if the model cannot make prediction for a structure.
     """
     set_logger(logger_level)
 
