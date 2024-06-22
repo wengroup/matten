@@ -386,8 +386,11 @@ class TensorDatasetPrediction(TensorDataset):
         super().__init__(filename, r_cut, **kwargs)
 
     def get_data(self):
+        # process info like ijkl=jikl=klij to get unique indices, ijkl
+        indices = self.tensor_target_formula.split("=")[0].replace("-", "").strip()
+
         # create a dummy target tensor
-        zero_tensor = np.zeros((3, 3, 3, 3)).tolist()
+        zero_tensor = np.zeros([3] * len(indices)).tolist()
         zero_tensors = [zero_tensor] * len(self.structures)
 
         df = pd.DataFrame(
