@@ -338,6 +338,11 @@ class BaseModel(pl.LightningModule):
         # ========== compute predictions ==========
         preds = self.decode(graphs)
 
+        # select atoms
+        if "atom_selector" in labels:
+            selector = labels["atom_selector"]
+            preds = {k: v[selector] for k, v in preds.items()}
+
         # ========== compute losses ==========
         target_weight = graphs.get("target_weight", None)
         individual_loss, total_loss = self.compute_loss(
@@ -504,6 +509,8 @@ class ModelForPyGData(BaseModel):
 
         # task labels
         labels = {name: graphs.y[name] for name in self.tasks}
+        if "atom_selector" in graphs.y:
+            labels["atom_selector"] = graphs.y["atom_selector"]
 
         # convert graphs to a dict to use NequIP stuff
         graphs = graphs.tensor_property_to_dict()

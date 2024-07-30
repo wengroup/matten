@@ -11,7 +11,7 @@ from pytorch_lightning.cli import instantiate_class as lit_instantiate_class
 from matten.dataset.structure_scalar_tensor import TensorDataModule
 from matten.log import set_logger
 from matten.model_factory.task import TensorRegressionTask
-from matten.model_factory.tfn_scalar_tensor import ScalarTensorModel
+from matten.model_factory.tfn_atomic_tensor import AtomicTensorModel
 
 
 def instantiate_class(d: Union[Dict, List]):
@@ -36,7 +36,7 @@ def main(config: Dict):
     dm.prepare_data()
     dm.setup()
 
-    model = ScalarTensorModel(
+    model = AtomicTensorModel(
         tasks=TensorRegressionTask(name=config["data"]["tensor_target_name"]),
         backbone_hparams=config["model"],
         dataset_hparams=dm.get_to_model_info(),
@@ -69,7 +69,7 @@ def main(config: Dict):
 
 
 if __name__ == "__main__":
-    config_file = Path(__file__).parent / "configs" / "materials_tensor.yaml"
+    config_file = Path(__file__).parent / "configs" / "atomic_tensor.yaml"
     config = get_args(config_file)
 
     seed = config.get("seed_everything", 1)

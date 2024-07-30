@@ -50,6 +50,8 @@ class TensorDataset(InMemoryDataset):
             10.0, 0:1.0}}, then for data points with minLC less than 0, it will have
             a weight of 10, and for those with minLC larger than 0, it will have a
             weight of 1. By default `None` means all data points has a weight of 1.
+        atom_selector: a list of bools to indicate which atoms to use in the structure
+            to compute the target. If `None`, all atoms are used.
         global_featurizer: featurizer to compute global features.
         normalize_global_features: whether to normalize the global feature.
         atom_featuruzer:  featurizer to compute atom features.
@@ -79,6 +81,7 @@ class TensorDataset(InMemoryDataset):
         log_scalar_targets: List[bool] = None,
         normalize_scalar_targets: List[bool] = None,
         tensor_target_weight: Dict[str, Dict[str, float]] = None,
+        atom_selector: List[bool] = None,
         global_featurizer: None = None,
         normalize_global_features: bool = False,
         atom_featurizer: None = None,
@@ -97,6 +100,7 @@ class TensorDataset(InMemoryDataset):
         self.normalize_tensor_target = normalize_tensor_target
 
         self.tensor_target_weight = tensor_target_weight
+        self.atom_selector = atom_selector
 
         self.scalar_target_names = (
             [] if scalar_target_names is None else scalar_target_names
@@ -259,7 +263,7 @@ class TensorDataset(InMemoryDataset):
                 # TODO, convert to irreps tensor, assuming all input tensor is Cartesian
                 converter = CartesianTensorWrapper(formula=self.tensor_target_formula)
                 df[self.tensor_target_name] = df[self.tensor_target_name].apply(
-                    lambda x: converter.from_cartesian(x).reshape(1, -1)
+                    lambda x: torch.atleast_2d(converter.from_cartesian(x))
                 )
             elif self.tensor_target_format == "cartesian":
                 df[self.tensor_target_name] = df[self.tensor_target_name].apply(
@@ -302,6 +306,10 @@ class TensorDataset(InMemoryDataset):
                     y[self.tensor_target_name] = (
                         y[self.tensor_target_name] * self.tensor_target_scale
                     )
+
+                # atom selector
+                if self.atom_selector is not None:
+                    y["atom_selector"] = torch.as_tensor(row[self.atom_selector])
 
                 x = None
                 if self.global_featurizer:
@@ -414,6 +422,7 @@ class TensorDataModule(BaseDataModule):
         tensor_target_scale: float = 1.0,
         normalize_tensor_target: bool = False,
         tensor_target_weight: Dict[str, Dict[str, float]] = None,
+        atom_selector: List[bool] = None,
         scalar_target_names: List[str] = None,
         log_scalar_targets: List[bool] = None,
         normalize_scalar_targets: List[bool] = None,
@@ -457,6 +466,7 @@ class TensorDataModule(BaseDataModule):
         self.tensor_target_scale = tensor_target_scale
         self.normalize_tensor_target = normalize_tensor_target
         self.tensor_target_weight = tensor_target_weight
+        self.atom_selector = atom_selector
 
         self.scalar_target_names = scalar_target_names
         self.log_scalar_targets = log_scalar_targets
@@ -563,6 +573,7 @@ class TensorDataModule(BaseDataModule):
             log_scalar_targets=self.log_scalar_targets,
             normalize_scalar_targets=self.normalize_scalar_targets,
             tensor_target_weight=self.tensor_target_weight,
+            atom_selector=self.atom_selector,
             global_featurizer=gf,
             normalize_global_features=self.normalize_global_features,
             atom_featurizer=af,
@@ -584,6 +595,7 @@ class TensorDataModule(BaseDataModule):
             log_scalar_targets=self.log_scalar_targets,
             normalize_scalar_targets=self.normalize_scalar_targets,
             tensor_target_weight=self.tensor_target_weight,
+            atom_selector=self.atom_selector,
             global_featurizer=gf,
             normalize_global_features=self.normalize_global_features,
             atom_featurizer=af,
@@ -605,6 +617,7 @@ class TensorDataModule(BaseDataModule):
             log_scalar_targets=self.log_scalar_targets,
             normalize_scalar_targets=self.normalize_scalar_targets,
             tensor_target_weight=self.tensor_target_weight,
+            atom_selector=self.atom_selector,
             global_featurizer=gf,
             normalize_global_features=self.normalize_global_features,
             atom_featurizer=af,

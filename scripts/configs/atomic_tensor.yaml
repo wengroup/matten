@@ -1,16 +1,20 @@
+## Config files for atomic tensor (i.e. a tensor value for each atom)
+
 seed_everything: 35
 log_level: info
 
 data:
-  root: ../datasets/
-  tensor_target_name: elastic_tensor_full
-  trainset_filename: example_crystal_elasticity_tensor_n100.json
-  valset_filename: example_crystal_elasticity_tensor_n100.json
-  testset_filename: example_crystal_elasticity_tensor_n100.json
+  tensor_target_name: nmr_tensor
+  atom_selector: atom_selector
+  tensor_target_formula: ij=ji
+  root: .
+  trainset_filename: /Users/mjwen.admin/Documents/Dataset/NMR_tensor/si_nmr_data_small.json
+  valset_filename: /Users/mjwen.admin/Documents/Dataset/NMR_tensor/si_nmr_data_small.json
+  testset_filename: /Users/mjwen.admin/Documents/Dataset/NMR_tensor/si_nmr_data_small.json
   r_cut: 5.0
   reuse: false
   loader_kwargs:
-    batch_size: 32
+    batch_size: 2
     shuffle: true
 
 model:
@@ -22,7 +26,7 @@ model:
   species_embedding_dim: 16
 
   # spherical harmonics embedding of edge direction
-  irreps_edge_sh: 0e + 1o + 2e + 3o + 4e
+  irreps_edge_sh: 0e + 1o + 2e
 
   # radial edge distance embedding
   radial_basis_type: bessel
@@ -47,7 +51,7 @@ model:
   average_num_neighbors: auto
 
   # point convolution
-  conv_layer_irreps: 32x0o+32x0e + 16x1o+16x1e + 4x2o+4x2e + 2x3o+2x3e + 2x4e
+  conv_layer_irreps: 32x0o+32x0e + 16x1o+16x1e + 4x2o+4x2e
   nonlinearity_type: gate
   normalization: batch
   resnet: true
@@ -56,15 +60,13 @@ model:
   # output
   ##########
 
-  conv_to_output_hidden_irreps_out: 16x0e + 2x2e + 4e
-
   # output_format and output_formula should be used together.
   # - output_format (can be `irreps` or `cartesian`) determines what the loss
   #   function will be on (either on the irreps space or the cartesian space).
   # - output_formula gives what the cartesian formula of the tensor is.
   #   For example, ijkl=jikl=klij specifies a forth-rank elasticity tensor.
   output_format: irreps
-  output_formula: ijkl=jikl=klij
+  output_formula: ij=ji
 
   # pooling node feats to graph feats
   reduce: mean
