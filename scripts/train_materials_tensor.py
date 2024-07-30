@@ -37,7 +37,7 @@ def main(config: Dict):
     dm.setup()
 
     model = ScalarTensorModel(
-        tasks=TensorRegressionTask(name="elastic_tensor_full"),
+        tasks=TensorRegressionTask(name=config["data"]["tensor_target_name"]),
         backbone_hparams=config["model"],
         dataset_hparams=dm.get_to_model_info(),
         optimizer_hparams=config["optimizer"],

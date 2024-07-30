@@ -3,6 +3,7 @@ log_level: info
 
 data:
   root: ../datasets/
+  tensor_target_name: elastic_tensor_full
   trainset_filename: example_crystal_elasticity_tensor_n100.json
   valset_filename: example_crystal_elasticity_tensor_n100.json
   testset_filename: example_crystal_elasticity_tensor_n100.json
