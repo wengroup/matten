@@ -63,7 +63,10 @@ def get_data_loader(
         "testset_filename",
         "compute_dataset_statistics",
     ]:
-        config.pop(k)
+        try:
+            config.pop(k)
+        except KeyError:
+            pass
 
     r_cut = config.pop("r_cut")
     config["dataset_statistics_fn"] = None
@@ -110,7 +113,8 @@ def check_species(model, structures: List[Structure]):
 def evaluate(
     model,
     loader,
-    target_name: str = "elastic_tensor_full",
+    tensor_target_name: str = "elastic_tensor_full",
+    tensor_target_formula="ijkl=jikl=klij",
 ) -> List[torch.Tensor]:
     """
     Evaluate the model to generate predictions.
@@ -118,21 +122,22 @@ def evaluate(
     Args:
         model: the model to evaluate.
         loader: the data loader.
-        target_name: the name of the target property.
+        tensor_target_name: the name of the target property.
+        tensor_target_formula: the formula of the target property.
 
     Returns:
         a list of predicted elastic tensors.
     """
 
-    converter = CartesianTensorWrapper("ijkl=jikl=klij")
+    converter = CartesianTensorWrapper(tensor_target_formula)
 
     predictions = []
 
     model.eval()
     with torch.no_grad():
         for batch in tqdm.tqdm(loader):
-            preds, _ = model(batch, task_name=target_name)
-            p = preds[target_name]
+            preds, _ = model(batch, task_name=tensor_target_name)
+            p = preds[tensor_target_name]
             p = converter.to_cartesian(p)
             predictions.extend(p)
 
@@ -145,6 +150,7 @@ def predict(
     checkpoint: str = "model_final.ckpt",
     batch_size: int = 200,
     logger_level: str = "ERROR",
+    is_elasticity_tensor: bool = True,
 ) -> Union[ElasticTensor, List[ElasticTensor]]:
     f"""
     Predict the property of a structure or a list of structures.
@@ -165,6 +171,9 @@ def predict(
             but it may be limited by the CPU memory.
         logger_level: the level of the logger. Options are `DEBUG`, `INFO`, `WARNING`,
             `ERROR`, and `CRITICAL`.
+        is_elasticity_tensor: whether the target property is an elasticity tensor. If
+            `True`, the returned value will be a pymargen `ElasticTensor` object.
+            Otherwise, it will be numpy array.
 
     Returns:
         Predicted tensor(s). `None` if the model cannot make prediction for a structure.
@@ -181,8 +190,18 @@ def predict(
     check_species(model, structure)
     loader = get_data_loader(structure, model_identifier, batch_size=batch_size)
 
-    predictions = evaluate(model, loader)
-    predictions = [ElasticTensor(t) for t in predictions]
+    config = get_pretrained_config(model_identifier)
+
+    predictions = evaluate(
+        model,
+        loader,
+        tensor_target_name=config["data"]["tensor_target_name"],
+        tensor_target_formula=config["data"]["tensor_target_formula"],
+    )
+    if is_elasticity_tensor:
+        predictions = [ElasticTensor(t) for t in predictions]
+    else:
+        predictions = [t.numpy() for t in predictions]
 
     # deal with failed entries
     failed = set(loader.dataset.failed_entries)
