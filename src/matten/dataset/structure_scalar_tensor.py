@@ -388,10 +388,20 @@ class TensorDatasetPrediction(TensorDataset):
         filename: str,  # this can be None
         r_cut: float,
         structures: List[Structure],
+        tensor_target_name: str = "elastic_tensor_full",
+        tensor_target_format: str = "irreps",
+        tensor_target_formula: str = "ijkl=jikl=klij",
         **kwargs,
     ):
         self.structures = structures
-        super().__init__(filename, r_cut, **kwargs)
+        super().__init__(
+            filename,
+            r_cut=r_cut,
+            tensor_target_name=tensor_target_name,
+            tensor_target_format=tensor_target_format,
+            tensor_target_formula=tensor_target_formula,
+            **kwargs,
+        )
 
     def get_data(self):
         # process info like ijkl=jikl=klij to get unique indices, ijkl
