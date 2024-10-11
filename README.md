@@ -15,6 +15,13 @@ git clone https://github.com/wengroup/matten.git
 pip install -e ./matten
 ```
 
+If you get package version conflicts, try the below command to install the dependencies
+with strict version requirements.
+
+```
+pip install -e "./matten[strict]"
+```
+
 ## Use the pretrained model
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wengroup/matten/blob/main/notebooks/predict_colab.ipynb)
