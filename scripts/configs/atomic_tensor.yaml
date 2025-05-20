@@ -8,9 +8,9 @@ data:
   atom_selector: atom_selector
   tensor_target_formula: ij=ji
   root: .
-  trainset_filename: /Users/mjwen.admin/Documents/Dataset/NMR_tensor/si_nmr_data_small.json
-  valset_filename: /Users/mjwen.admin/Documents/Dataset/NMR_tensor/si_nmr_data_small.json
-  testset_filename: /Users/mjwen.admin/Documents/Dataset/NMR_tensor/si_nmr_data_small.json
+  trainset_filename: /Users/mjwen/Documents/Research/Dataset/NMR_tensor/si_nmr_data.json
+  valset_filename: /Users/mjwen/Documents/Research/Dataset/NMR_tensor/si_nmr_data.json
+  testset_filename: /Users/mjwen/Documents/Research/Dataset/NMR_tensor/si_nmr_data.json
   r_cut: 5.0
   reuse: false
   loader_kwargs:
