@@ -109,7 +109,7 @@ class InMemoryDataset(PyGInMemoryDataset):
 
         super().__init__(root=root, pre_transform=pre_transform)
 
-        self.data, self.slices = torch.load(self.processed_paths[0])
+        self.data, self.slices = torch.load(self.processed_paths[0], weights_only=False)
 
     def get_data(self) -> List[DataPoint]:
         """
