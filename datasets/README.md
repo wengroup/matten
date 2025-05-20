@@ -16,11 +16,11 @@ This is the dataset used in the paper: `Machine Learning Full NMR Chemical Shift
 of Silicon Oxides with Equivariant Graph Neural Networks`, by Venetos et al. https://doi.org/10.1021/acs.jpca.2c07530
 
 ### Explanation 
-- structure: pymatgen structure, consisting of N atoms.
-- species: atomic number of the atoms in the structure.
-- nmr_tensor: list of M 3x3 tensor matrix, each 3x3 tensor correspond to one atom. 1<= M <= N.
-- atom_selector: indices of atoms the tensor correspond to.
+- `structure`: pymatgen structure, consisting of N atoms.
+- `species`: atomic number of the atoms in the structure.
+- `nmr_tensor`: list of M 3x3 tensor matrix, each 3x3 tensor correspond to one atom. 1<= M <= N.
+- `atom_selector`: indices of atoms the tensor correspond to.
   For example, [True, False, False, True, False, False] means the tensors correspond to 
   atoms 0, and 3. This also means the size of `nmr_tensor` is M=2.
-- Qn: polymerization of the SiO4 in the structure.
-- sigma_iso: isotropic tensor value.
+- `Qn`: polymerization of the SiO4 in the structure.
+- `sigma_iso`: isotropic tensor value.
