@@ -18,10 +18,9 @@ of Silicon Oxides with Equivariant Graph Neural Networks`, by Venetos et al. htt
 ### Explanation 
 - structure: pymatgen structure, consisting of N atoms.
 - species: atomic number of the atoms in the structure.
-- nmr_tensor: list of 3x3 tensor matrix. This is a list of size M>=1, but M < N.
+- nmr_tensor: list of M 3x3 tensor matrix, each 3x3 tensor correspond to one atom. 1<= M <= N.
 - atom_selector: indices of atoms the tensor correspond to.
-  For example [True, 0, 0, True, 0, 0, 0, 0] means the tensors correspond to atoms 0,
-  and 3. This also means the size of `nmr_tensor` is M=2.
-- ind: the indices of the atoms, similar info as `index`.
+  For example, [True, False, False, True, False, False] means the tensors correspond to 
+  atoms 0, and 3. This also means the size of `nmr_tensor` is M=2.
 - Qn: polymerization of the SiO4 in the structure.
 - sigma_iso: isotropic tensor value.
