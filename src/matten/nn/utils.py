@@ -5,10 +5,10 @@ import torch.nn.functional as fn
 from e3nn.nn import BatchNorm, FullyConnectedNet, Gate, NormActivation
 from e3nn.o3 import Irrep, Irreps, TensorProduct
 from torch import Tensor
-from torch_scatter import scatter
 
 from matten.data.irreps import DataKey, ModuleIrreps
 from matten.nn._nequip import ShiftedSoftPlus
+from matten.nn.scatter import scatter
 from matten.utils import detect_nan_and_inf
 
 ACTIVATION = {
