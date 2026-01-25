@@ -3,10 +3,10 @@ from typing import Dict, List, Tuple
 import torch
 from e3nn.math import soft_one_hot_linspace
 from e3nn.o3 import Irreps
-from torch_scatter import scatter
 
 from matten.data.irreps import DataKey, ModuleIrreps
 from matten.nn._nequip import with_edge_vectors
+from matten.nn.scatter import scatter
 
 
 class SpeciesEmbedding(ModuleIrreps, torch.nn.Module):

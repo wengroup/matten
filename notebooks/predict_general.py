@@ -19,12 +19,7 @@ def get_structure():
 if __name__ == "__main__":
     structure = get_structure()
 
-    tensor = predict(
-        structure,
-        model_identifier="/Users/mjwen.admin/Packages/matten_wengroup/scripts",
-        checkpoint="epoch=9-step=10.ckpt",
-        is_elasticity_tensor=False,
-    )
+    tensor = predict( structure, is_elasticity_tensor=True)
 
     print("value:", tensor)
     print("type:", type(tensor))

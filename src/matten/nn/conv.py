@@ -7,14 +7,13 @@ With one difference:
   the time.
 """
 
-
 from typing import Dict
 
 import torch
 from e3nn.o3 import FullyConnectedTensorProduct, Irreps
-from torch_scatter import scatter
 
 from matten.data.irreps import DataKey, ModuleIrreps
+from matten.nn.scatter import scatter
 from matten.nn.utils import (
     ACTIVATION,
     ActivationLayer,
@@ -111,7 +110,9 @@ class PointConv(ModuleIrreps, torch.nn.Module):
         # message
         node_feats = self.lin1(node_feats, node_attrs)
         msg = self.tp(node_feats[edge_src], edge_attrs, edge_embedding)
-        aggregated_msg = scatter(msg, edge_dst, dim_size=len(node_feats), dim=0)
+        aggregated_msg = scatter(
+            msg, edge_dst, dim_size=len(node_feats), dim=0, reduce="sum"
+        )
 
         if self.avg_num_neighbors is not None:
             aggregated_msg = aggregated_msg.div(self.avg_num_neighbors**0.5)
